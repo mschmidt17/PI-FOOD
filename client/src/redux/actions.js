@@ -92,7 +92,7 @@ export const orderByScore = (payload) => {
     };
 };
   
-export const getClean = () => {
+export const cleanDetail = () => {
     return {
         type: 'CLEAN_DETAIL',
     };

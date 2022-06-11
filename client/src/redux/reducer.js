@@ -1,17 +1,3 @@
-import {
-    CLEAN_DETAIL,
-    FILTER_DIETS,
-    GET_API_INFO_ALL,
-    GET_DETAIL,
-    GET_TYPES_DIETS,
-    ORDER_BY_NAME,
-    ORDER_BY_SCORE,
-    SEARCH_BY_NAME,
-    POST_RECIPE,
-    NAME_USER,
-    SELECT_DIETS,
-} from './actions.js';
-
 const initialState = {
     recipesAll: [],
     recipes: [],
@@ -22,28 +8,28 @@ const initialState = {
   
 const rootReducer = (state = initialState, actions) => {
     switch (actions.type) {
-        case GET_API_INFO_ALL:
+        case "GET_API_INFO_ALL":
             return {
                 ...state,
                 recipesAll: actions.payload,
                 recipes: actions.payload,
             };
-        case GET_DETAIL:
+        case "GET_DETAIL":
             return {
                 ...state,
                 detail: actions.payload,
             };
-        case CLEAN_DETAIL:
+        case "CLEAN_DETAIL":
             return {
                 ...state,
                 detail: {},
             };
-        case GET_TYPES_DIETS:
+        case "GET_TYPES_DIETS":
             return {
                 ...state,
                 dietsAll: actions.payload,
             };
-        case ORDER_BY_NAME:
+        case "ORDER_BY_NAME":
             let orderName = state.recipesAll?.sort((a, b) => {
                 if (a.name.toLowerCase() < b.name.toLowerCase()) {
                     if (actions.payload === 'asc') {
@@ -65,7 +51,7 @@ const rootReducer = (state = initialState, actions) => {
                 ...state,
                 recipesAll: orderName,
             };
-        case ORDER_BY_SCORE:
+        case "ORDER_BY_SCORE":
             let orderScore =
             actions.payload === 'low'
                 ? state.recipesAll.sort(function (a, b) {
@@ -91,7 +77,7 @@ const rootReducer = (state = initialState, actions) => {
                 ...state,
                 recipesAll: orderScore,
             };
-        case FILTER_DIETS:
+        case "FILTER_DIETS":
             const recipesfilter = state.recipes;
             const recipesfiltered =
             actions.payload === 'All'
@@ -115,21 +101,21 @@ const rootReducer = (state = initialState, actions) => {
                 ...state,
                 recipesAll: recipesfiltered,
             };
-        case POST_RECIPE:
+        case "POST_RECIPE":
             return {
                 ...state,
             };
-        case SEARCH_BY_NAME:
+        case "SEARCH_BY_NAME":
             return {
                 ...state,
                 recipesAll: actions.payload,
             };
-        case SELECT_DIETS:
+        case "SELECT_DIETS":
             return {
                 ...state,
                 dietsAll: state.dietsAll.filter((diet) => diet.name !== actions.payload),
             };
-        case NAME_USER:
+        case "NAME_USER":
                 return {
                     ...state,
                     nameUser: actions.payload,

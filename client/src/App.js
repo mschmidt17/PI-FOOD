@@ -1,18 +1,17 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './Pages/LandingPage/LandingPage';
-import Home from './Components/Home/Home';
-import CreateRecipe from './Pages/CreateRecipe/CreateRecipe';
-import DetailRecipe from './Components/DetailRecipe/DetailRecipe';
+import LandingPage from "./components/LandingPage.jsx";
+import Home from "./components/Home.jsx";
+
+
+
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} /> 
-        <Route path="/home" element={<Home />} />
-        <Route path="/detail/:id" element={<DetailRecipe />} />
-        <Route path="/create" element={<CreateRecipe />} />       
+        <Route path="/Home" element={<Home/>} />    
       </Routes>
     </div>
   );
