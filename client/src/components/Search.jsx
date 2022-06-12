@@ -1,44 +1,34 @@
 import React from "react";
-import "../CSS/Search.css";
+import style from "../CSS/Search.css";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { searchbyName } from '../redux/actions.js';
+import { getNameRecipes } from "../redux/actions.js";
 
 
-export default function Search({ setSearchError }) {
-    const dispatch = useDispatch();
-    const [setErrorInput] = useState(true);
-    const [inputValue, setinputValue] = useState('');
-  
-    const handleChange = ({ target }) => {
-      setinputValue(target.value);
-      const isValidate = target.validity.valid;
-      if (isValidate) {
-        setErrorInput(false);
-      }
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      !inputValue ? setSearchError(true) : setSearchError(false);
-      dispatch(searchbyName(inputValue));
-      setinputValue('');
-    };
+export default function Search() {
+    const dispatch = useDispatch()
+    const [name, setName] = useState('')
 
+    function handleInputChange(e) {
+        e.preventDefault()
+        setName(e.target.value)   //valor del input
+    }
 
-    return(
-        <div className="Contenedor-search">
-            <form className="form-search"  onSubmit={handleSubmit}>
-                <div className="buscador">
-                    <input
-                        className='input-search'
-                        type="text"
-                        placeholder="Buscar recetas..."
-                        onChange={handleChange}
-                    />
-                </div>
-                <button className="button-search">Search</button>
-            </form>
+    function handleSubmit(e) {
+        e.preventDefault()
+        dispatch(getNameRecipes(name)) //el estado
+        setName('')  
+    }
+
+    return (
+        <div className={style.contains}>
+            <input className={style.input}
+                value = {name}
+                type='text'
+                placeholder="Recipe..."
+                onChange={(e) => handleInputChange(e)}
+            />
+            <button className={style.btnSearch} type='submit' onClick={(e) => handleSubmit(e)}> Search </button>
         </div>
     )
-};
+}

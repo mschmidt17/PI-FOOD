@@ -1,0 +1,28 @@
+.card {
+    background: rgba(238, 238, 227, 0.787);
+    margin-left: 20px;
+    margin-top: 25px;
+    height: 500px;
+    width: 310px;
+    backdrop-filter: blur(6px);
+    border: 10px solid #1c1d1c;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.096) 0px 7px 29px 0px;
+    border: 3px solid black;
+    color: #000000;
+    opacity: 60%;
+}
+
+.image{
+    height: 200px;
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    border-radius: 30px;
+    
+}
+
+.diet{
+    line-height: 0;
+}

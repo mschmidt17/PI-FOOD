@@ -1,129 +1,129 @@
-const initialState = {
-    recipesAll: [],
+import {GET_CLEAN} from "./actions.js"
+
+const initialState = {     
     recipes: [],
-    detail: {},
-    dietsAll: [],
-    nameUser: [],
-};
-  
-const rootReducer = (state = initialState, actions) => {
-    switch (actions.type) {
-        case "GET_API_INFO_ALL":
+    allRecipes: [],
+    detail: [],
+    diets: []
+}
+
+
+function rootReducer (state = initialState, action) {
+    switch (action.type){
+        case 'GET_RECIPES':
             return {
                 ...state,
-                recipesAll: actions.payload,
-                recipes: actions.payload,
-            };
-        case "GET_DETAIL":
+                recipes: action.payload,     //en mi estado recipes, manda todo lo que envie la accion getrecipes
+                allRecipes: action.payload  // el estado que se siempre mantiene con todas las recetas
+            }
+        
+        case 'GET_NAME_RECIPES':
             return {
                 ...state,
-                detail: actions.payload,
-            };
-        case "CLEAN_DETAIL":
-            return {
+                recipes: action.payload
+            }
+        case 'GET_DIETS':
+            return{
                 ...state,
-                detail: {},
-            };
-        case "GET_TYPES_DIETS":
-            return {
+                diets: action.payload
+            }
+
+        case 'POST_RECIPE':
+            return{
+                ...state,   //post no necesita-> crea en otra ruta
+            }
+        
+        case 'FILTER_BY_DIET':
+            const allRecipes= state.allRecipes //copia del estado
+            const dietsFilter = action.payload === "All" 
+                ? state.allRecipes 
+                : allRecipes.filter((recipe) => 
+                recipe.createdInDb
+                    ? recipe.diets.find((diet) => {
+                        if (diet.name === action.payload) {
+                            return recipe;
+                        }   
+                })
+                : recipe.diets.find((diet) => {
+                    if (diet.includes(action.payload)) {
+                        return recipe;
+                    }
+                }));
+            return{
                 ...state,
-                dietsAll: actions.payload,
-            };
-        case "ORDER_BY_NAME":
-            let orderName = state.recipesAll?.sort((a, b) => {
+                recipes: dietsFilter,
+            }; 
+
+
+        case 'FILTER_BY_NAME': 
+            let orderName = state.recipes?.sort((a, b) => {   
                 if (a.name.toLowerCase() < b.name.toLowerCase()) {
-                    if (actions.payload === 'asc') {
+                    if (action.payload === 'asc') {
                         return -1;
                     } else {
                         return 1;
                     }
                 }
                 if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                    if (actions.payload === 'dsc') {
+                    if (action.payload === 'desc') {
                         return -1;
                     } else {
                         return 1;
                     }
                 }
-                return 0;
+                return 0   //si son iguales
             });
+            console.log(orderName)
             return {
                 ...state,
-                recipesAll: orderName,
+                recipes: orderName,
             };
-        case "ORDER_BY_SCORE":
-            let orderScore =
-            actions.payload === 'low'
-                ? state.recipesAll.sort(function (a, b) {
-                    //sort-> compara y ordena izq o der d
+
+        case 'FILTER_BY_SCORE':
+            let orderScore = 
+                action.payload === 'low' 
+                ? state.recipes.sort(function (a, b) {
                     if (a.score > b.score) {
                         return 1;
                     }
                     if (b.score > a.score) {
                         return -1;
-                    }
-                    return 0; //si son iguales
-                })
-                : state.recipesAll.sort(function (a, b) {
-                    if (a.score > b.score) {
-                        return -1;
-                    }
-                    if (b.score > a.score) {
-                        return 1;
                     }
                     return 0;
+                })
+                : state.recipes.sort(function (a, b) {
+                    if (a.score > b.score) {
+                        return -1;
+                    }
+                    if (b.score > a.score) {
+                        return 1;
+                    }
+                        return 0;
                 });
+            console.log(orderScore)
             return {
                 ...state,
-                recipesAll: orderScore,
+                recipes: orderScore,
             };
-        case "FILTER_DIETS":
-            const recipesfilter = state.recipes;
-            const recipesfiltered =
-            actions.payload === 'All'
-                ? state.recipes
-                : recipesfilter.filter((recipe) =>
-                    recipe.createInDb
-                    ? recipe.diets.find((diet) => {
-                        if (diet.name === actions.payload) {
-                            return recipe;
-                        }
-                    })
-                    : recipe.diets.find((diet) => {
-                        if (diet.includes(actions.payload)) {
-                            return {
-                                recipe,
-                            };
-                        }
-                    })
-                );
-            return {
+
+        case 'GET_DETAIL':
+            return{
                 ...state,
-                recipesAll: recipesfiltered,
-            };
-        case "POST_RECIPE":
-            return {
+                detail: action.payload
+            }
+
+        case GET_CLEAN:
+            return{
                 ...state,
-            };
-        case "SEARCH_BY_NAME":
-            return {
-                ...state,
-                recipesAll: actions.payload,
-            };
-        case "SELECT_DIETS":
-            return {
-                ...state,
-                dietsAll: state.dietsAll.filter((diet) => diet.name !== actions.payload),
-            };
-        case "NAME_USER":
-                return {
-                    ...state,
-                    nameUser: actions.payload,
-                };
-        default:
-        return state;
+                datail: []
+            }    
+        
+        default: 
+            return state
     }
 };
 
-export default rootReducer;
+
+
+export default rootReducer;  
   

@@ -34,7 +34,7 @@ export default function NavBar({setcurrenPage, setSearchError}) {
     };
 
     return(
-        <div className="Contenedor-home">
+        <div className="Contenedor-Navbar">
             <Search setSearchError={setSearchError} />
             <div className="containerNavFilter">
                 <div className="">

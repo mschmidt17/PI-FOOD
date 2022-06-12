@@ -5,18 +5,20 @@ const axios = require('axios');
 const { API_PI_KEY } = process.env;
 
 const getInfoApiFood = async () => {
-    const foodgetAll = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_PI_KEY}&addRecipeInformation=true`);
-    const apiInfo = await foodgetAll.data.results.map((food) => {
+    let apiurl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_PI_KEY}&addRecipeInformation=true&number=100`;
+
+    const foodgetAll = await axios.get(apiurl);
+    const apiInfo = foodgetAll.data.results.map((food) => {
         return {
-        id: food.id,
-        name: food.title,
-        image: food.image,
-        score: food.spoonacularScore,
-        healthScore: food.healthScore,
-        summary: food.summary,
-        steps: food.analyzedInstructions[0]?.steps?.map((step) => step),
-        diets: food.diets.map((diet) => diet),
-        dishTypes: food.dishTypes.map((dish) => dish),
+            id: food.id,
+            name: food.title,
+            image: food.image,
+            score: food.spoonacularScore,
+            healthScore: food.healthScore,
+            summary: food.summary,
+            steps: food.analyzedInstructions[0]?.steps?.map((step) => step),
+            diets: food.diets.map((diet) => diet),
+            dishTypes: food.dishTypes.map((dish) => dish),
         };
     });
     return apiInfo;

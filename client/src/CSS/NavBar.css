@@ -1,0 +1,13 @@
+.Contenedor-Navbar{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    width: 100%;
+}
+
+.containerNavFilter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}

@@ -2,86 +2,118 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from "react-router-dom";
-import "../CSS/Home.css";
-import NavBar from "./NavBar.jsx";
+import style from "../CSS/Home.css";
+import Search from "./Search.jsx";
 import Paginado from "./Paginado.jsx";
-import Card from "./Card.jsx";
-import Loading from "./Loading.jsx";
+import Card from "./Card/Card.jsx";
+import { filterRecipesByDiet, getRecipes, getDiets, filterByName, filterByScore } from "../redux/actions.js";
 
 
 
 export default function Home() {
-    const dispatch = useDispatch();
-    const [searchError, setSearchError] = useState(false);
+    const dispatch = useDispatch()    //para utilizar la constante e ir despachando mis acciones
+    const allRecipes = useSelector((state) => state.recipes)  //recipes(estado en reducer) traeme en esa const todo lo que esta en el estado de recipes
+    const dietAll = useSelector((state) => state.diets)
+    const [currentPage, setCurrentPage] = useState(1) // lo seteo en 1 porque siempre arranco en la primer pagina
+    const [recipesPerPage] = useState(9)  //cuantas recetas quiero por pagina, por estado local
+    const iOfLastRecipe = currentPage * recipesPerPage      //pagina actual por cantidad de recetas por pag(indice del ultimo rec que tengo por pag)
+    const iOfFirstRecipe = iOfLastRecipe - recipesPerPage
+    const currentRecipes = allRecipes.slice(iOfFirstRecipe, iOfLastRecipe)   //guarda recetas por pagina -> slice toma una porcion del arreglo que le paso por parametro
 
-    //Me traigo estados globales de redux:
-    const recipeAll = useSelector((state) => state.recipesAll);
-    const recipes = useSelector((state) => state.recipes)
-
-    //Seteo estados locales para el paginado: 
-    const [currenPage, setcurrenPage] = useState(1);
-    const [recipesPerPage] = useState(9);
-
-    //Paginado:
-    const indexOfLastRecipe = currenPage * recipesPerPage;
-    const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+    
+    const paginado = (pageNumber) => {    //para el renderizado del componente
+      setCurrentPage(pageNumber)
+    }
   
-    const paginado = (pageNumber) => {
-      setcurrenPage(pageNumber);
-    };
-
-    useEffect(() => {
-        setcurrenPage(1);
-    }, [dispatch])
-
-    //Renderiza las Cards juntas y las relaciona con el paginado:
-    const mostrarCards = (recipes) => {
-        const currentRecipes = recipeAll.slice(indexOfFirstRecipe, indexOfLastRecipe);
-        return (
-          <div>
-            <div className="paginado">
-                {currentRecipes.length === 0 && currentRecipes ? (
-                    <Loading />
-                ) : (
-                    currentRecipes.map((e) => {
-                    return (
-                        <div key={e.id}>
-                            <Link to={"/recipes/" + e.id} style={{ textDecoration: 'none' }}>
-                                <Card
-                                    name={e.name}
-                                    image={e.image}
-                                    temperament={e.temperament}
-                                    weight={e.weight}
-                                />
-                            </Link>
-                        </div>
-                    );
-                    })
-                )}
-            </div>
-            
-              <Paginado
-                recipesPerPage={recipesPerPage}
-                recipeAll={recipeAll.length}
-                paginado={paginado}
-              />
-           
-          </div>
-        );
-    };
+  
+    useEffect(() => {            //traigo las recetas cuando el componente se monta.
+      dispatch(getRecipes())
+      dispatch(getDiets())
+    }, [dispatch])              //de lo que depende
+  
+    function handleClick(e) {    //le paso el evento..
+      e.preventDefault()
+      dispatch(getRecipes())   //resetea las recipes
+    }
+  
+    function handleDiets(e) {
+      e.preventDefault()
+      dispatch(filterRecipesByDiet(e.target.value));
+    }
+  
+    function handleOrderByName(e) {
+      e.preventDefault()
+      dispatch(filterByName(e.target.value))  //despacho la action
+      setCurrentPage(1)
+    }
+  
+  
+    function handleOrderByScore(e) {
+      e.preventDefault()
+      dispatch(filterByScore(e.target.value))
+      setCurrentPage(1)
+    }
   
     return(
         <div className="Contenedor-home">
-            <NavBar setcurrentPage={setcurrenPage} setSearchError={setSearchError}/>
+            <div className={style.container}>
+                <Link className={style.button2} to="/recipe"> CREATE RECIPE </Link>
 
-            {searchError && (
-                <h3 className="mensaje-error-buscador">
-                {'No recipe with this name was found'}
-                </h3>
-            )}
+                <div>
+                    <h1 className={style.page}> RECIPE'S PAGE </h1>
+                </div>
 
-            <div>
-                {recipeAll.length > 0 ? mostrarCards(recipeAll) : mostrarCards(recipes)}
+                <div className={style.bordercont}>
+                    <Search/>
+
+                    <select className={style.select} onChange={(e) => handleOrderByName(e)}>
+                        <option value="All">All</option>
+                        <option value="asc">A to Z</option>  
+                        <option value="desc">Z to A</option> 
+                    </select>
+
+                    <select className={style.select} onChange={(e) => handleOrderByScore(e)}>
+                        <option value="All">All</option>
+                        <option value="high"> High score </option>
+                        <option value="low"> Low score </option>
+                    </select>
+
+                    <select className={style.select} onChange={(e) => handleDiets(e)}>
+                        <option value="All">All</option>
+                        {dietAll?.map((diet) => (
+                        <option key={diet.id} value={diet.name}> {diet.name} </option>
+                        ))}
+                    </select>
+
+                    <button className={style.button} onClick={e => { handleClick(e) }}>
+                        BACK TO ALL RECIPES
+                    </button>
+
+
+                    <div className={style.cards}>
+                        {currentRecipes?.map((el) => { 
+                            return ( 
+                                <Link className={style.link} key={el.id} to={`recipes/${el.id}`}>
+                                    <Card 
+                                        key={el.id} 
+                                        id={el.id} 
+                                        name={el.name} 
+                                        diet={el.diets} 
+                                        image={el.image}
+                                    />
+                                </Link>
+                            ) 
+                        })
+                        }
+                    </div>
+
+                    <Paginado 
+                        key = {1}
+                        recipesPerPage={recipesPerPage}
+                        allRecipes={allRecipes.length}   //porque necesito un valor numerico
+                        paginado={paginado}
+                    />
+                </div>
             </div>
         </div>
     )

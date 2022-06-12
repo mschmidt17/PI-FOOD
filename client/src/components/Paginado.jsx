@@ -1,29 +1,25 @@
 import React from "react";
-import "../CSS/paginado.css";
+import style from "../CSS/paginado.css";
 
 
+export default function Paginado({ recipesPerPage, allRecipes, paginado }) {
+    const pageNumers = []
 
-export default function Paginado({recipesPerPage, recipeAll, paginado}) {
-    const pageNumber = [];
-
-    for (let i = 0; i < Math.ceil(recipeAll / recipesPerPage); i++) {
-      pageNumber.push(i + 1);
+    for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
+        pageNumers.push(i)
     }
 
     return (
-      <div>
         <nav>
-          <ul className="contenedor-paginado">
-            {pageNumber &&
-              pageNumber.map((number) => (
-                <li className="lista-paginado" key={number}>
-                  <button className="numero-paginado" onClick={() => paginado(number)}>
-                    {number}
-                  </button>
-                </li>
-              ))}
-          </ul>
+            <ul className={style.paginado}>
+                {pageNumers &&
+                    pageNumers.map(number => (  //renderizo los numeros por separado
+                        <li key={number} className={style.li}>
+                            <button className={style.button} onClick={() => paginado(number)}>{number}</button>
+                        </li>
+                    ))}
+            </ul>
         </nav>
-      </div>
-    );
-}
+
+    )
+};

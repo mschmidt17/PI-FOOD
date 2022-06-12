@@ -1,0 +1,11 @@
+.Contenedor-search{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-search{
+    display: flex;
+    flex-direction: row;
+}

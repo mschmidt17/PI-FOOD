@@ -1,100 +1,85 @@
-import axios from 'axios';
+import axios from "axios";   
+export const GET_CLEAN = "GET_CLEAN"
 
-export const getRecipesAll = () => {
-    return function (dispatch) {
-        axios.get('http://localhost:3001/recipes').then((response) =>
-            dispatch({
-            type: 'GET_API_INFO_ALL',
-            payload: response.data,
-            })
-        );
-    };
-};
+export function getRecipes() {
+  return async function (dispatch) {
+    var json = await axios.get("http://localhost:3001/recipes")
+    return dispatch({
+      type: 'GET_RECIPES',
+      payload: json.data,
+
+    })
+  }
+}
+
+export function getDiets() {
+  return async function (dispatch) {
+    var json = await axios.get("http://localhost:3001/diets");
+    return dispatch({
+      type: 'GET_DIETS',
+      payload: json.data,
+    })
+  }
+}
+
+export function filterRecipesByDiet(payload) {
+  return {
+    type: 'FILTER_BY_DIET',
+    payload,
+  }
+}
+
+export function postRecipe(payload) {
+  return async function (dispatch) {
+    const data = await axios.post("http://localhost:3001/recipes", payload)  //post del payload
+    return data
+  }
+
+}
+
+export function filterByName(payload) {  
+  return {
+    type: 'FILTER_BY_NAME',
+    payload,
+  }
+}
+
+export function filterByScore(payload) {
+  return {
+    type: "FILTER_BY_SCORE",
+    payload,
+  }
+}
+
+
+export function getNameRecipes(name) { //por busqueda -> query
+   return async function (dispatch) {
+    try {
+      
+      var json = await axios.get(`http://localhost:3001/recipes?name=${name}`)
+      //console.log(json.data)
+      return dispatch({
+        type: 'GET_NAME_RECIPES',
+        payload: json.data,
+      })
+    } catch (error) {
+      return error
+    }
+  }
+}
+
+export function getRecipeDetail(id) {
+  return function (dispatch) {
+       axios.get(`http://localhost:3001/recipes/${id}`)
+      .then(res => dispatch({type: 'GET_DETAIL', payload: res.data}))
+      .catch(err => console.error(err))
+   
+    }
   
-export const searchbyName = (name) => {
-    return async function (dispatch) {
-        const response = await axios.get(
-            `http://localhost:3001/recipes?name=${name}`
-        );
-        if (!response) {
-            return dispatch({
-            type: 'SEARCH_BY_NAME',
-            payload: [],
-            });
-        }
-        return dispatch({
-            type: 'SEARCH_BY_NAME',
-            payload: response.data,
-        });
-    };
-};
-  
-export const getDetail = (id) => {
-    return function (dispatch) {
-        axios.get(`http://localhost:3001/recipes/${id}`).then((response) =>
-            dispatch({
-            type: 'GET_DETAIL',
-            payload: response.data,
-            })
-        );
-    };
-};
-  
-export const getDiets = () => {
-    return async function (dispatch) {
-        const response = await axios.get(`http://localhost:3001/types`);
-        return dispatch({
-            type: 'GET_TYPES_DIETS',
-            payload: response.data,
-        });
-    };
-};
-  
-export const postRecipe = (payload) => {
-    return async function (dispatch) {
-        const response = await axios.post(`http://localhost:3001/recipe`, payload);
-        return response;
-    };
-};
-  
-export const nameUser = (payload) => {
-    return {
-        type: 'NAME_USER',
-        payload: payload,
-    };
-};
-  
-export const orderByName = (payload) => {
-    return {
-        type: 'ORDER_BY_NAME',
-        payload: payload,
-    };
-};
-  
-export const selecDiets = (payload) => {
-    return {
-        type: 'SELECT_DIETS',
-        payload: payload,
-    };
-};
-  
-export const filterByDiets = (payload) => {
-    return {
-        type: 'FILTER_DIETS',
-        payload,
-    };
-};
-  
-export const orderByScore = (payload) => {
-    return {
-        type: 'ORDER_BY_SCORE',
-        payload: payload,
-    };
-};
-  
-export const cleanDetail = () => {
-    return {
-        type: 'CLEAN_DETAIL',
-    };
-};
-  
+}
+
+export function getClean(){
+  return{
+    type: GET_CLEAN,
+  }
+}
