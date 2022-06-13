@@ -12,17 +12,18 @@
     border: 3px solid black;
     color: #000000;
     opacity: 60%;
-}
+   
+  }
 
-.image{
+  .image{
     height: 200px;
     width: 300px;
     margin-top: 10px;
     margin-bottom: 50px;
     border-radius: 30px;
     
-}
+  }
 
-.diet{
+  .diet{
     line-height: 0;
-}
+  }

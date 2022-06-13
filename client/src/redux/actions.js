@@ -70,10 +70,12 @@ export function getNameRecipes(name) { //por busqueda -> query
 
 export function getRecipeDetail(id) {
   return function (dispatch) {
-       axios.get(`http://localhost:3001/recipes/${id}`)
-      .then(res => dispatch({type: 'GET_DETAIL', payload: res.data}))
+      axios.get(`http://localhost:3001/recipes/${id}`)
+      .then(res => dispatch({
+        type: 'GET_DETAIL', 
+        payload: res.data
+      }))
       .catch(err => console.error(err))
-   
     }
   
 }

@@ -1,14 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
 .Contenedor-home{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    font-family: 'Fredericka the Great', cursive;
+    padding: 2%;
+    background-color: rgba(139, 139, 139, 0.678);
 }
 
-.Contenedor-card{
+.btn-home{
+    text-decoration: none;
+    font-size: larger;
+    font-weight: bolder;
+    color:white;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.btn-home:hover{
+    letter-spacing: 2px;
+    color: rgb(253, 194, 0);
+}
+
+.bordercont-home{
+    margin: 40px 10px 10px 10px;
+}
+
+.select-home{
+    padding: 6px;
+    margin: 5px;
+    border:none;
+    border-radius: 4px;
+}
+
+.button-reset-home{
+    padding: 7px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    transition: 0.6s;
+    background-color: rgba(236, 186, 20, 0.767);
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.button-reset-home:hover{
+    background-color: rgb(253, 194, 0);
+    box-shadow: 1px 1px 10px 5px rgb(39, 39, 39);
+}
+
+.cards-container-home{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%
+    width: 100%;
 }
 
+.style-link-home{
+    text-decoration: none;
+}

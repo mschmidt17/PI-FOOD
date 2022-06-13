@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../CSS/Search.css";
+import  "../CSS/Search.css";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getNameRecipes } from "../redux/actions.js";
@@ -21,14 +21,14 @@ export default function Search() {
     }
 
     return (
-        <div className={style.contains}>
-            <input className={style.input}
+        <div className="contains-search">
+            <input className="input-search"
                 value = {name}
                 type='text'
                 placeholder="Recipe..."
                 onChange={(e) => handleInputChange(e)}
             />
-            <button className={style.btnSearch} type='submit' onClick={(e) => handleSubmit(e)}> Search </button>
+            <button className="btnSearch" type="submit" onClick={(e) => handleSubmit(e)}> SEARCH </button>
         </div>
     )
 }

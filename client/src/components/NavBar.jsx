@@ -84,7 +84,7 @@ export default function NavBar({setcurrenPage, setSearchError}) {
             </div>
 
             <Link to="/create">
-              <button className="boton-create">Create NEW RECIPE</button>
+              <button className="boton-create">CREATE NEW RECIPE</button>
             </Link>
         </div>
     )

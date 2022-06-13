@@ -8,17 +8,17 @@ const getInfoApiFood = async () => {
     let apiurl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_PI_KEY}&addRecipeInformation=true&number=100`;
 
     const foodgetAll = await axios.get(apiurl);
-    const apiInfo = foodgetAll.data.results.map((food) => {
+    const apiInfo = foodgetAll.data.results.map((e) => {
         return {
-            id: food.id,
-            name: food.title,
-            image: food.image,
-            score: food.spoonacularScore,
-            healthScore: food.healthScore,
-            summary: food.summary,
-            steps: food.analyzedInstructions[0]?.steps?.map((step) => step),
-            diets: food.diets.map((diet) => diet),
-            dishTypes: food.dishTypes.map((dish) => dish),
+            id: e.id,
+            name: e.title,
+            image: e.image,
+            score: e.spoonacularScore,
+            dishTypes: e.dishTypes.map((d) => { return { name: d } }),    //es un arreglo, utilizo el map para que me devuelva todos
+            diets: e.diets.map((d) => { return { name: d } }),
+            summary: e.summary,
+            healthScore: e.healthScore,
+            steps: e.analyzedInstructions
         };
     });
     return apiInfo;

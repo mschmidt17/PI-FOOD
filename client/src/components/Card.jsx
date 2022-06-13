@@ -1,5 +1,6 @@
 import React from "react";
-import style from  "./card.module.css";
+import style from "../CSS/Card.css";
+
 
 
 export default function Card({ name, diet, image }) {
@@ -11,4 +12,4 @@ export default function Card({ name, diet, image }) {
         </div>
     
     );
-};
+}

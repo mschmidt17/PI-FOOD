@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import style from "../CSS/Home.css";
 import Search from "./Search.jsx";
 import Paginado from "./Paginado.jsx";
-import Card from "./Card/Card.jsx";
+import Card from "./Card.jsx";
 import { filterRecipesByDiet, getRecipes, getDiets, filterByName, filterByScore } from "../redux/actions.js";
 
 
@@ -56,44 +56,39 @@ export default function Home() {
   
     return(
         <div className="Contenedor-home">
-            <div className={style.container}>
-                <Link className={style.button2} to="/recipe"> CREATE RECIPE </Link>
+                <Link className='btn-home' to="/recipes"> CREATE RECIPE </Link>
 
-                <div>
-                    <h1 className={style.page}> RECIPE'S PAGE </h1>
-                </div>
-
-                <div className={style.bordercont}>
+                <div className='bordercont-home'>
                     <Search/>
 
-                    <select className={style.select} onChange={(e) => handleOrderByName(e)}>
+                    <select className='select-home' onChange={(e) => handleOrderByName(e)}>
                         <option value="All">All</option>
                         <option value="asc">A to Z</option>  
                         <option value="desc">Z to A</option> 
                     </select>
 
-                    <select className={style.select} onChange={(e) => handleOrderByScore(e)}>
+                    <select className='select-home' onChange={(e) => handleOrderByScore(e)}>
                         <option value="All">All</option>
                         <option value="high"> High score </option>
                         <option value="low"> Low score </option>
                     </select>
 
-                    <select className={style.select} onChange={(e) => handleDiets(e)}>
+                    <select className='select-home' onChange={(e) => handleDiets(e)}>
                         <option value="All">All</option>
                         {dietAll?.map((diet) => (
                         <option key={diet.id} value={diet.name}> {diet.name} </option>
                         ))}
                     </select>
 
-                    <button className={style.button} onClick={e => { handleClick(e) }}>
-                        BACK TO ALL RECIPES
+                    <button className='button-reset-home' onClick={e => { handleClick(e) }}>
+                        RESET
                     </button>
 
 
-                    <div className={style.cards}>
+                    <div className='cards-container-home'>
                         {currentRecipes?.map((el) => { 
                             return ( 
-                                <Link className={style.link} key={el.id} to={`recipes/${el.id}`}>
+                                <Link className='style-link-home' key={el.id} to={`/recipes/${el.id}`}>
                                     <Card 
                                         key={el.id} 
                                         id={el.id} 
@@ -114,7 +109,6 @@ export default function Home() {
                         paginado={paginado}
                     />
                 </div>
-            </div>
         </div>
     )
 };

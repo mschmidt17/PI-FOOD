@@ -1,3 +1,45 @@
-.Contenedor-Landing{
-    height: 800px;
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+.contenedorLanding{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LandingPage{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(240, 248, 255, 0.719);
+    border-radius: 10px;
+    padding: 3% 10% 3% 10%;
+    margin-top: 18%;
+    font-family: 'Fredericka the Great', cursive;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 10px 10px rgba(236, 186, 20, 0.753);
+}
+
+.titulo-landingP{
+    display: flex;
+    margin: 0;
+    font-size: 50px;
+    letter-spacing: 1px;
+}
+
+.botonLanding{
+    padding: 15px;
+    border: none;
+    font-size: large;
+    font-weight: bolder;
+    background-color: rgba(236, 186, 20, 0.753);
+    border-radius: 10px;
+    margin-top: 20%;
+}
+
+
+.botonLanding:hover{
+    cursor: pointer;
+    background-color: rgb(247, 171, 7);
+      
 }
