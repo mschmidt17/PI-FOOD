@@ -35,75 +35,51 @@ function rootReducer (state = initialState, action) {
         
         case 'FILTER_BY_DIET':
             const allRecipes= state.allRecipes //copia del estado
-            const dietsFilter = action.payload === "All" 
-                ? state.allRecipes 
-                : allRecipes.filter((recipe) => 
-                recipe.createdInDb
-                    ? recipe.diets.find((diet) => {
-                        if (diet.name === action.payload) {
-                            return recipe;
-                        }   
-                })
-                : recipe.diets.find((diet) => {
-                    if (diet.includes(action.payload)) {
-                        return recipe;
-                    }
-                }));
+            const dietsFiltered = 
+                action.payload === "All" 
+                ? allRecipes 
+                : allRecipes.filter((recipe) => recipe.diets.includes(action.payload));
             return{
                 ...state,
-                recipes: dietsFilter,
+                recipes: dietsFiltered,
             }; 
 
 
-        case 'FILTER_BY_NAME': 
-            let orderName = state.recipes?.sort((a, b) => {   
-                if (a.name.toLowerCase() < b.name.toLowerCase()) {
-                    if (action.payload === 'asc') {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
+        case 'FILTER_BY_NAME':
+            if (action.payload === "desc") {
+                return{
+                    ...state,
+                    recipes: [...state.recipes].sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1)),
+                } 
+            }
+            else {
+                return{
+                    ...state,
+                    recipes: [...state.recipes].sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)),
                 }
-                if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                    if (action.payload === 'desc') {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                }
-                return 0   //si son iguales
-            });
-            console.log(orderName)
-            return {
-                ...state,
-                recipes: orderName,
             };
 
+
         case 'FILTER_BY_SCORE':
-            let orderScore = 
-                action.payload === 'low' 
-                ? state.recipes.sort(function (a, b) {
-                    if (a.score > b.score) {
-                        return 1;
-                    }
-                    if (b.score > a.score) {
-                        return -1;
-                    }
-                    return 0;
-                })
-                : state.recipes.sort(function (a, b) {
-                    if (a.score > b.score) {
-                        return -1;
-                    }
-                    if (b.score > a.score) {
-                        return 1;
-                    }
-                        return 0;
-                });
-            console.log(orderScore)
-            return {
-                ...state,
-                recipes: orderScore,
+            if (action.payload === "low") {
+                return {
+                    ...state,
+                    recipes: [...state.recipes].sort((a, b) => {
+                        if (a.healthScore > b.healthScore) return 1;
+                        if (a.healthScore < b.healthScore) return -1;
+                        else return 0;
+                    })
+                }
+            }
+            else {
+                return {
+                    ...state,
+                    recipes: [...state.recipes].sort((a, b) => {
+                        if (a.healthScore < b.healthScore) return 1;
+                        if (a.healthScore > b.healthScore) return -1;
+                        else return 0;
+                    })
+                }
             };
 
         case 'GET_DETAIL':

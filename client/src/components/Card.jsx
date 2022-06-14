@@ -11,7 +11,7 @@ export default function Card({ name, diet, image }) {
             </div>
             <div className="info-card">
                 <h3 className="recipe-name-card" >{name}</h3>
-                {diet.map((e, index) => <p key={index}  className="diet-card"> {e.name} </p>)}
+                {diet.map((e, index) => <p key={index}  className="diet-card"> {e} </p>)}
             </div>
         </div>
     

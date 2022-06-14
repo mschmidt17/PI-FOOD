@@ -13,9 +13,8 @@ const getInfoApiFood = async () => {
             id: e.id,
             name: e.title,
             image: e.image,
-            score: e.spoonacularScore,
-            dishTypes: e.dishTypes.map((d) => { return { name: d } }),    //es un arreglo, utilizo el map para que me devuelva todos
-            diets: e.diets.map((d) => { return { name: d } }),
+            dishTypes: e.dishTypes?.map((d) => { return { name: d } }),    //es un arreglo, mapeo para que me devuelva un array de objetos
+            diets: e.diets.map((d) => d),      //es un arreglo, mapeo para que me devuelva un array de objetos
             summary: e.summary,
             healthScore: e.healthScore,
             steps: e.analyzedInstructions
@@ -25,15 +24,24 @@ const getInfoApiFood = async () => {
 };
 
 const getInfoAPiDb = async () => {
-    return await Recipe.findAll({
+    const infoDatabase = await Recipe.findAll({
         include: {
-        model: Diet,
-        attributes: ['name'],
-        through: {
-            attributes: [],
-        },
+            model: Diet,
         },
     });
+    const mapInfoDb = infoDatabase?.map((r) => {
+        return {
+            id: r.id,
+            name: r.name,
+            image: r.image,
+            diets: r.diets?.map((d) => d.name),
+            dishTypes: r.dishTypes?.map((d) => d.name),
+            summary: r.summary,
+            healthScore: r.healthScore,
+            steps: r.analyzedInstructions,
+        };
+    });
+    return mapInfoDb;
 };
 
 const getAllRecipeTotal = async () => {
@@ -98,7 +106,7 @@ router.post('/', async (req, res) => {
     
         let dietsDb = await Diet.findAll({
             where: {
-            name: diets,
+                name: diets,
             },
         });
     

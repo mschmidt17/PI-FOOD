@@ -22,19 +22,19 @@ export function getDiets() {
   }
 }
 
-export function filterRecipesByDiet(payload) {
-  return {
-    type: 'FILTER_BY_DIET',
-    payload,
-  }
-}
-
 export function postRecipe(payload) {
   return async function (dispatch) {
     const data = await axios.post("http://localhost:3001/recipes", payload)  //post del payload
     return data
   }
 
+}
+
+export function filterRecipesByDiet(payload) {
+  return {
+    type: 'FILTER_BY_DIET',
+    payload,
+  }
 }
 
 export function filterByName(payload) {  
