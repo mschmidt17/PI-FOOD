@@ -12,9 +12,16 @@
 }
 
 .button-paginado{
-    background: transparent;
+    background: orange;
     color: white;
     font-size: larger;
-    font-weight: bolder;
-    border: none;
-}
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+   
+} 
+
+
+
+
+

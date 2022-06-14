@@ -1,0 +1,45 @@
+.super-contenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 800px;
+}
+
+.detail-contains{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(240, 248, 255, 0.548);    
+    margin: 50px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color:#000;
+    border-style:outset;
+    border-color: rgb(240, 185, 4);
+    border-width: 7px;
+}
+
+.info-detail{
+    display: flex;
+    flex-direction: row;
+}
+
+.detail-row1, .detail-row2{
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-row1{
+    width: 350px;
+}
+
+.button{
+    font-weight: bolder;
+    font-size: larger;
+    width: 100px;
+    height: 50px;   
+    border-radius: 10px; 
+    box-shadow: 3px 3px 6px 6px rgb(253, 194, 0);
+    cursor: pointer;
+}

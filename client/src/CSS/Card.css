@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
 .card-detail {
   margin: 20px;
   background-color: aliceblue;
@@ -5,12 +8,15 @@
   height: 430px;
   overflow: hidden;
   border-radius: 20px;
+  justify-content: center;
+  border-style:outset;
+  border-color: rgb(240, 185, 4);
+  border-width: 7px;
 }
 
 
 .card-detail:hover{
-  background-color: #d7dfe9;
-  text-transform: capitalize;    
+  background-color: #d7dfe9;    
 }
 
 .image-card{
@@ -22,6 +28,9 @@
   padding: 3px;
   align-items: center;
   justify-content: center;
+  color: black;
+  font-family: 'Inter', sans-serif;
+  margin-top: 10px;
 }
 
 .recipe-name-card{

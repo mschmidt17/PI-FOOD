@@ -68,7 +68,7 @@ export default function Home() {
                     </select>
 
                     <select className='select-home' onChange={(e) => handleOrderByScore(e)}>
-                        <option value="All">All</option>
+                        <option value="All"> All</option>
                         <option value="high"> High score </option>
                         <option value="low"> Low score </option>
                     </select>

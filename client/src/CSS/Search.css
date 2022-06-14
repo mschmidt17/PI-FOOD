@@ -18,13 +18,13 @@
     border: none;
     border-radius: 4px;
     transition: 0.6s;
-    background-color: rgba(84, 143, 30, 0.767);
+    background-color: rgba(236, 186, 20, 0.767);
     font-weight: bolder;
     cursor: pointer;
 }
 
 .btnSearch:hover{
-    background-color: rgb(75, 146, 9);
+    background-color: rgb(253, 194, 0);
     box-shadow: 1px 1px 10px 5px rgb(39, 39, 39);
 }
 
