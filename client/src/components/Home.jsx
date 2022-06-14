@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from "react-router-dom";
-import style from "../CSS/Home.css";
+import  "../CSS/Home.css";
 import Search from "./Search.jsx";
 import Paginado from "./Paginado.jsx";
 import Card from "./Card.jsx";
@@ -102,12 +102,14 @@ export default function Home() {
                         }
                     </div>
 
-                    <Paginado 
-                        key = {1}
-                        recipesPerPage={recipesPerPage}
-                        allRecipes={allRecipes.length}   //porque necesito un valor numerico
-                        paginado={paginado}
-                    />
+                    <div className="paginado-home">
+                        <Paginado 
+                            key = {1}
+                            recipesPerPage={recipesPerPage}
+                            allRecipes={allRecipes.length}   //porque necesito un valor numerico
+                            paginado={paginado}
+                        />
+                    </div>
                 </div>
         </div>
     )

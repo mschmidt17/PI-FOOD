@@ -1,5 +1,20 @@
 
-.contenedor-paginado{
+.paginado-contenedor{
+    display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content: space-evenly;
+    margin: 10px 150px 10px 150px;
+}
+
+.li-paginado{
+    list-style: none;
+
+}
+
+.button-paginado{
+    background: transparent;
+    color: white;
+    font-size: larger;
+    font-weight: bolder;
+    border: none;
 }

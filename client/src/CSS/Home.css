@@ -3,7 +3,6 @@
 .Contenedor-home{
     font-family: 'Fredericka the Great', cursive;
     padding: 2%;
-    background-color: rgba(139, 139, 139, 0.678);
 }
 
 .btn-home{
@@ -52,8 +51,15 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .style-link-home{
     text-decoration: none;
+}
+
+.paginado-home{
+    align-items: center;
+    justify-content: center;
 }
