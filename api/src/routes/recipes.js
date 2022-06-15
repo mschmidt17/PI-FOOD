@@ -93,7 +93,7 @@ router.get('/:id', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    const { name, image, score, steps, healthScore, diets, summary } = req.body;
+    const { name, image, score, steps, healthScore, diets, summary } = req.body;        //Guarda lo que el usuario completo en el formulario 
     try {
         let recipeCreate = await Recipe.create({
             name,
@@ -104,7 +104,7 @@ router.post('/', async (req, res) => {
             healthScore,
         });
     
-        let dietsDb = await Diet.findAll({
+        let dietsDb = await Diet.findAll({                                             //espera que se cree una dieta con los datos capturados en mi BD
             where: {
                 name: diets,
             },

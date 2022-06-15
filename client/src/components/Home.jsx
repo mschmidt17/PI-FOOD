@@ -7,6 +7,7 @@ import Search from "./Search.jsx";
 import Paginado from "./Paginado.jsx";
 import Card from "./Card.jsx";
 import { filterRecipesByDiet, getRecipes, getDiets, filterByName, filterByScore } from "../redux/actions.js";
+import Loading from "./Loading";
 
 
 
@@ -84,32 +85,36 @@ export default function Home() {
                         RESET
                     </button>
 
+                    {allRecipes.length > 0 ?
+                        <div>
+                            <div className='cards-container-home'>
+                                {currentRecipes?.map((el) => { 
+                                    return ( 
+                                        <Link className='style-link-home' key={el.id} to={`/recipes/${el.id}`}>
+                                            <Card 
+                                                key={el.id} 
+                                                id={el.id} 
+                                                name={el.name} 
+                                                diet={el.diets} 
+                                                image={el.image}
+                                            />
+                                        </Link>
+                                    ) 
+                                })
+                                }
+                            </div>
 
-                    <div className='cards-container-home'>
-                        {currentRecipes?.map((el) => { 
-                            return ( 
-                                <Link className='style-link-home' key={el.id} to={`/recipes/${el.id}`}>
-                                    <Card 
-                                        key={el.id} 
-                                        id={el.id} 
-                                        name={el.name} 
-                                        diet={el.diets} 
-                                        image={el.image}
-                                    />
-                                </Link>
-                            ) 
-                        })
-                        }
-                    </div>
-
-                    <div className="paginado-home">
-                        <Paginado 
-                            key = {1}
-                            recipesPerPage={recipesPerPage}
-                            allRecipes={allRecipes.length}   //porque necesito un valor numerico
-                            paginado={paginado}
-                        />
-                    </div>
+                            <div className="paginado-home">
+                                <Paginado 
+                                    key = {1}
+                                    recipesPerPage={recipesPerPage}
+                                    allRecipes={allRecipes.length}   //porque necesito un valor numerico
+                                    paginado={paginado}
+                                />
+                            </div>
+                        </div>
+                        : <Loading/>
+                    }
                 </div>
         </div>
     )

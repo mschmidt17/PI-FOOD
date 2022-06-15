@@ -88,100 +88,100 @@ export default function NewRecipe() {
 
     return (
         <div className="contains-newrecipe">
-            <Link to='/home'><button className="buttonHome">BACK</button></Link>
+        
+            <Link to='/home'><button className="buttonHome">HOME</button></Link>
 
-            <form id="formulario" className="form-newrecipe"
-                onSubmit={(e) => handleSubmit(e)}>
+            <div className="Formulario-newrecipe">
 
-                <div>
-                    <h1>Create your recipe!</h1>
-                    <p>Recipe name:</p>
-                    <input className="input-newrecipe"
-                        type="text"
-                        value={input.name}
-                        required
-                        name="name"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.name && <p> {errors.name}</p>}
-                </div>
-
-                <div>
-                    <p>Summary:</p>
-                    <textarea className="summary"
-                        type="text"
-                        value={input.summary}
-                        required
-                        name="summary"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.summary && <p> {errors.summary}</p>}
-                </div>
-
-                <div>
-                    <div>
-                        <p>Optional Image: </p>
-                        <input className="input-newrecipe"
-                            type="text"
-                            value={input.image}
-                            name="image"
-                            placeholder="URL image"
-                            onChange={(e) => handleChange(e)}
-                        />
-                    </div>
-                </div>
-
-                <div>
-                    <p>Health Score:</p>
-                    <input className="input-newrecipe"
-                        type="number"
-                        value={input.healthScore}
-                        required
-                        name="healthScore"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.healthScore && <p> {errors.healthScore}</p>}
-
-                </div>
-
-                <div>
-                    <p>Steps:</p>
-                    <textarea className="steps-newrecipe"
-                        type="textarea"
-                        value={input.steps}
-                        required
-                        name="steps"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.steps && <p> {errors.steps}</p>}
-                </div>
-
-                <div>
-                    <h3>Select diets </h3>
-                    <select className="diets-newrecipe"
-                        required
-                        onChange={(e) => handleSelect(e)}>
-                        {diets.map((d, index) => (
-                            <option key={index} value={d.name}>{d.name}</option>
-                        ))}
-                    </select>
-                    <ul>
-                        {input.diets.map((el) => ( 
-                            <li key={el} className="list-diets"> 
-                                <div className="contains-diet-newrecipe">
-                                    <p>{el.toUpperCase()}</p>
-                                    <button className="delete-diet-newrecipe" onClick={() => HandleDelete(el)}>X</button>
+                <h1 className="titulo-newrecipe">CREATE YOUR RECIPE!</h1>
+                <form id="formulario" className="form-newrecipe" onSubmit={(e) => handleSubmit(e)}>
+                    <div className="form-left">
+                        <div>
+                            <p>Recipe name:</p>
+                            <input className="input-newrecipe"
+                                type="text"
+                                value={input.name}
+                                required
+                                name="name"
+                                onChange={(e) => handleChange(e)}
+                            />
+                            {errors.name && <p> {errors.name}</p>}
+                        </div>
+                        <div>
+                            <p>Summary:</p>
+                            <textarea className="input-newrecipe"
+                                type="text"
+                                value={input.summary}
+                                required
+                                name="summary"
+                                onChange={(e) => handleChange(e)}
+                            />
+                            {errors.summary && <p> {errors.summary}</p>}
+                        </div>
+                        <div>
+                            <div>
+                                <p>Optional Image: </p>
+                                <input className="input-newrecipe"
+                                    type="text"
+                                    value={input.image}
+                                    name="image"
+                                    placeholder="URL image"
+                                    onChange={(e) => handleChange(e)}
+                                />
                             </div>
-                        </li>
-                        ))}
-                    </ul> 
-                   
-                </div>
+                        </div>
+                        <div>
+                            <p>Health Score:</p>
+                            <input className="input-newrecipe"
+                                type="number"
+                                value={input.healthScore}
+                                required
+                                name="healthScore"
+                                onChange={(e) => handleChange(e)}
+                            />
+                            {errors.healthScore && <p> {errors.healthScore}</p>}
 
-                <button className="btn-create-newrecipe" type="submit">Crate recipe</button>
+                        </div>
+                    </div>
 
-            </form>
+                    <div className="form-right">
+                        <div>
+                            <p>Steps:</p>
+                            <textarea className="input-newrecipe"
+                                type="textarea"
+                                value={input.steps}
+                                required
+                                name="steps"
+                                onChange={(e) => handleChange(e)}
+                            />
+                            {errors.steps && <p> {errors.steps}</p>}
+                        </div>
+                        <div>
+                            <p>Select diets:</p>
+                            <select className="input-newrecipe"
+                                required
+                                onChange={(e) => handleSelect(e)}>
+                                {diets.map((d, index) => (
+                                    <option key={index} value={d.name}>{d.name}</option>
+                                ))}
+                            </select>
+                            <ul>
+                                {input.diets.map((el) => ( 
+                                    <li key={el} className="list-diets"> 
+                                        <div className="contains-diet-newrecipe">
+                                            <p>{el.toUpperCase()}</p>
+                                            <button className="delete-diet-newrecipe" onClick={() => HandleDelete(el)}>X</button>
+                                    </div>
+                                </li>
+                                ))}
+                            </ul> 
+                        </div>
+                        <button className="btn-create-newrecipe" type="submit">CREATE RECIPE</button>
+                    </div>
+
+                </form>
+            </div>
 
         </div>
-    )
-}
+    );
+};

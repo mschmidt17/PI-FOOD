@@ -1,5 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
 .contains-newrecipe{
+    display: flex;
+    flex-direction: column;
     height: 800px;
     color:white;
     font-weight: bolder;
 }
+
+.buttonHome{
+    font-weight: bolder;
+    font-size: larger;
+    width: 100px;
+    height: 50px;   
+    border-radius: 10px; 
+    box-shadow: 3px 3px 6px 6px rgb(253, 194, 0);
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.Formulario-newrecipe{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(240, 248, 255, 0.548);    
+    margin: 50px 280px 50px 280px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color:#000;
+    border-style:outset;
+    border-color: rgb(240, 185, 4);
+    border-width: 7px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.titulo-newrecipe{
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.form-newrecipe{
+    display: flex;
+    flex-direction: row;
+    color: black;
+    font-size: large;
+    padding-bottom: 30px;
+}
+
+.form-right{
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    align-items: center;
+}
+
+.form-left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-right: 50px;
+
+}
+
+.input-newrecipe{
+    margin: 20px;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    background-color: rgba(240, 185, 4, 0.651);
+}
+
+.btn-create-newrecipe{
+    padding: 15px;
+    border-radius: 10px; 
+    cursor: pointer;
+    transition: 0.5s;
+    font-family: 'Fredericka the Great', cursive;
+    font-weight: bolder;
+}
+
+.btn-create-newrecipe:hover{
+    background-color: rgba(240, 185, 4, 0.904);
+    color: white;
+}
+

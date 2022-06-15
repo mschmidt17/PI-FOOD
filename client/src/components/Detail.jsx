@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getRecipeDetail, getClean } from "../redux/actions.js";
+import Loading from "./Loading.jsx";
 import "../CSS/Detail.css"
 
 
@@ -25,10 +26,10 @@ export default function Detail() {
             <Link to='/home'>
                 <button className='button'> HOME </button>
             </Link>
-            <div className='detail-contains'>
-                {myRecipe.length > 0 ?
-                <div> 
 
+            {myRecipe.length > 0 ?
+            <div className='detail-contains'>
+                <div> 
                     <div className="detail-header">
                         <h1 className='h1'> {myRecipe[0].name && myRecipe[0].name} </h1> 
                     </div>
@@ -39,7 +40,7 @@ export default function Detail() {
                             
                             <div>
                                 <h5 className='titles'>Tipe of diet:</h5>
-                                <h2>{myRecipe[0].diets && myRecipe[0].diets.map(el => el.name + ", ")}</h2>
+                                <h2>{myRecipe[0].diets && myRecipe[0].diets.map(el => el + ", ")}</h2>
                             </div>
                             
                             <div>
@@ -67,9 +68,10 @@ export default function Detail() {
 
                     </div>
 
-                </div> : <p> LOADING...</p>
-                }
+                </div> 
             </div>
+            : <Loading/>
+            }
         </div>
    )
 }
