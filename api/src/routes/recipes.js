@@ -61,9 +61,8 @@ router.get('/',async (req, res) => {
             );
             filterNameQuery.length
             ? res.status(200).send(filterNameQuery)
-            : res
-                .status(404)
-                .send({ message: `Recipe with name: ${name} does not exist` });
+            : res.send([])
+            
         } else {
             res.status(200).send(allRecipes);
         }

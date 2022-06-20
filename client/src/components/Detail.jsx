@@ -10,14 +10,14 @@ import "../CSS/Detail.css"
 export default function Detail() {
     const dispatch = useDispatch()
     const { id } = useParams()
-    
+    const myRecipe = useSelector(state => state.detail)
 
     useEffect(() => {
         dispatch(getRecipeDetail(id))                       //props.match.params.id
-        return ()=>{dispatch(getClean())}                  //BLANQUEO EL ESTADO GLOBAL
+        dispatch(getClean())                 
     }, [dispatch, id])                 
 
-    const myRecipe = useSelector(state => state.detail)
+
 
   
 

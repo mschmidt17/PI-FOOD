@@ -55,9 +55,8 @@ export function filterByScore(payload) {
 export function getNameRecipes(name) { //por busqueda -> query
    return async function (dispatch) {
     try {
-      
       var json = await axios.get(`http://localhost:3001/recipes?name=${name}`)
-      //console.log(json.data)
+      console.log(json.data)
       return dispatch({
         type: 'GET_NAME_RECIPES',
         payload: json.data,

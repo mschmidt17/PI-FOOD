@@ -1,23 +1,33 @@
 import React from "react";
 import  "../CSS/Search.css";
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getNameRecipes } from "../redux/actions.js";
 
 
 export default function Search() {
     const dispatch = useDispatch()
     const [name, setName] = useState('')
+    const recipes = useSelector((state) => state.recipes)
 
     function handleInputChange(e) {
         e.preventDefault()
-        setName(e.target.value)   //valor del input
+        setName(e.target.value)                   //valor del input
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        dispatch(getNameRecipes(name)) //el estado
-        setName('')  
+        if(!name.trim()){
+            return alert("Please insert a valid food")
+        } else {
+            await dispatch(getNameRecipes(name.trim()))
+            console.log(name)
+            console.log(recipes)             //el estado
+            setName('')  
+        }
+        if(recipes.length > 70) {
+            return alert ("we dont have a recipe with that food")
+        }  
     }
 
     return (

@@ -8,6 +8,7 @@ import Paginado from "./Paginado.jsx";
 import Card from "./Card.jsx";
 import { filterRecipesByDiet, getRecipes, getDiets, filterByName, filterByScore } from "../redux/actions.js";
 import Loading from "./Loading";
+import casa from "../Imagen/Home.png"
 
 
 
@@ -57,7 +58,14 @@ export default function Home() {
   
     return(
         <div className="Contenedor-home">
+            
+            <div className="header-home">
+                <Link to = "/">
+                    <img src={casa} width="60" height="60" alt='' className='casa'/>
+                 </Link>     
                 <Link className='btn-home' to="/recipes"> CREATE RECIPE </Link>
+            </div>   
+              
 
                 <div className='bordercont-home'>
                     <Search/>
@@ -85,7 +93,9 @@ export default function Home() {
                         RESET
                     </button>
 
-                    {allRecipes.length > 0 ?
+                    {currentRecipes.length === 0 && currentRecipes ? ( 
+                        <Loading/>
+                        ):(  
                         <div>
                             <div className='cards-container-home'>
                                 {currentRecipes?.map((el) => { 
@@ -113,8 +123,7 @@ export default function Home() {
                                 />
                             </div>
                         </div>
-                        : <Loading/>
-                    }
+                    )}
                 </div>
         </div>
     )
