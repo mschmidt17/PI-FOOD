@@ -88,7 +88,7 @@ export default function NewRecipe() {
             alert("Please add at least one diet!")
         }
         else {
-            dispatch(postRecipe(input))
+            dispatch(postRecipe(input))          //
             alert('Receta creada con éxito')
             setInput({                            
                 name: "",
@@ -99,7 +99,6 @@ export default function NewRecipe() {
                 diet: [],
             })
             document.getElementById("formulario").reset();
-            window.location.reload();
         }
     };
 
@@ -178,12 +177,12 @@ export default function NewRecipe() {
                             <select className="input-newrecipe"
                                 
                                 onChange={(e) => handleSelect(e)}>
-                                {diets.map((d, index) => (
+                                {diets?.map((d, index) => (
                                     <option key={index} value={d.name}>{d.name}</option>
                                 ))}
                             </select>
                             <ul>
-                                {input.diets.map((el) => ( 
+                                {input.diets?.map((el) => ( 
                                     <li key={el} className="list-diets"> 
                                         <div className="contains-diet-newrecipe">
                                             <p>{el.toUpperCase()}</p>

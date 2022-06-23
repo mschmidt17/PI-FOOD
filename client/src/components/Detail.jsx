@@ -12,9 +12,9 @@ export default function Detail() {
     const { id } = useParams()
     const myRecipe = useSelector(state => state.detail)
 
-    useEffect(() => {
-        dispatch(getRecipeDetail(id))                       //props.match.params.id
-        return () => {
+    useEffect(() => {                         //cuando se monta el componente, se despacha la accion
+        dispatch(getRecipeDetail(id))                       
+        return () => {                        //quiero que haga algo antes que se desmonte el componente
             dispatch(getClean())
         };                 
     }, [dispatch, id])                 
@@ -62,11 +62,12 @@ export default function Detail() {
                             <div>
                                 <h3>Health Score: {myRecipe[0].healthScore}</h3>
                             </div>
+                    
                             
 
                             <div>
                                 <h5 className='titles'>Steps:</h5>
-                                {myRecipe.createInDb 
+                                {myRecipe[0].createInDb 
                                     ? (<h4 className='steps'>{myRecipe[0].steps ? myRecipe[0].steps : "This recipe doesnt have steps"}</h4>)
                                     : (<h4 className='steps'>{myRecipe[0].steps ? myRecipe[0].steps.map(e => e) : "This recipe doesnt have steps"}</h4>)
                                 }

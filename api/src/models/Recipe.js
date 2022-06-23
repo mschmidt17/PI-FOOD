@@ -34,8 +34,8 @@ module.exports = (sequelize) => {
     createInDb: {
       //las recetas que guarde en DB, van a tener esta propiedad, por ende es mas facil encontrarlas
       type: DataTypes.BOOLEAN,
-      allowNull: false, //es mas facil acceder a la receta que tenga en base de datos, porque todos los que cree en DB
-      defaultValue: true, //van a tener esta propiedad
+      allowNull: false, 
+      defaultValue: true, 
     },
   });
 };

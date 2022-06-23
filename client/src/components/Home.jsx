@@ -35,7 +35,7 @@ export default function Home() {
   
     function handleClick(e) {    
       e.preventDefault()
-      dispatch(getRecipes())   //resetea las recipes
+      window.location.reload();    //resetea las recipes
     }
   
     function handleDiets(e) {
@@ -93,7 +93,7 @@ export default function Home() {
                         RESET
                     </button>
 
-                    {currentRecipes.length === 0 ? ( 
+                    {currentRecipes.length === 0 && currentRecipes ? ( 
                         <Loading/>
                         ):(  
                         <div>

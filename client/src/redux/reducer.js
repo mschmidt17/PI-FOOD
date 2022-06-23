@@ -13,8 +13,8 @@ function rootReducer (state = initialState, action) {
         case 'GET_RECIPES':
             return {
                 ...state,
-                recipes: action.payload,     //en mi estado recipes, manda todo lo que envie la accion getrecipes
-                allRecipes: action.payload  // el estado que se siempre mantiene con todas las recetas
+                recipes: action.payload,         //en mi estado recipes, manda todo lo que envie la accion getrecipes
+                allRecipes: action.payload      // el estado que se siempre mantiene con todas las recetas
             }
         
         case 'GET_NAME_RECIPES':
@@ -30,7 +30,7 @@ function rootReducer (state = initialState, action) {
 
         case 'POST_RECIPE':
             return{
-                ...state,   //post no necesita-> crea en otra ruta
+                ...state,  
             }
         
         case 'FILTER_BY_DIET':

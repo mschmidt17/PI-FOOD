@@ -40,7 +40,8 @@ const getInfoAPiDb = async () => {
             dishTypes: r.dishTypes?.map((d) => d.name),
             summary: r.summary,
             healthScore: r.healthScore,
-            steps: r.analyzedInstructions,
+            steps: r.steps,
+            createInDb: r.createInDb,
         };
     });
     return mapInfoDb;
@@ -65,7 +66,7 @@ router.get('/',async (req, res) => {                                  //todas la
             );
             filterNameQuery.length > 0
             ? res.status(200).send(filterNameQuery)
-            : res.send([])
+            : res.send(allRecipes)
             
         } else {
             res.status(200).send(allRecipes);
