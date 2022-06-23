@@ -13,27 +13,27 @@ import casa from "../Imagen/Home.png"
 
 
 export default function Home() {
-    const dispatch = useDispatch()    //para utilizar la constante e ir despachando mis acciones
-    const allRecipes = useSelector((state) => state.recipes)  //recipes(estado en reducer) traeme en esa const todo lo que esta en el estado de recipes
+    const dispatch = useDispatch()    
+    const allRecipes = useSelector((state) => state.recipes)  
     const dietAll = useSelector((state) => state.diets)
-    const [currentPage, setCurrentPage] = useState(1) // lo seteo en 1 porque siempre arranco en la primer pagina
-    const [recipesPerPage] = useState(9)  //cuantas recetas quiero por pagina, por estado local
-    const iOfLastRecipe = currentPage * recipesPerPage      //pagina actual por cantidad de recetas por pag(indice del ultimo rec que tengo por pag)
+    const [currentPage, setCurrentPage] = useState(1) 
+    const [recipesPerPage] = useState(9)  
+    const iOfLastRecipe = currentPage * recipesPerPage      
     const iOfFirstRecipe = iOfLastRecipe - recipesPerPage
-    const currentRecipes = allRecipes.slice(iOfFirstRecipe, iOfLastRecipe)   //guarda recetas por pagina -> slice toma una porcion del arreglo que le paso por parametro
+    const currentRecipes = allRecipes.slice(iOfFirstRecipe, iOfLastRecipe)   
 
     
-    const paginado = (pageNumber) => {    //para el renderizado del componente
+    const paginado = (pageNumber) => {    
       setCurrentPage(pageNumber)
     }
   
   
-    useEffect(() => {            //traigo las recetas cuando el componente se monta.
+    useEffect(() => {            //traigo las recetas y las dietas cuando el componente se monta.
       dispatch(getRecipes())
       dispatch(getDiets())
-    }, [dispatch])              //de lo que depende
+    }, [dispatch])              
   
-    function handleClick(e) {    //le paso el evento..
+    function handleClick(e) {    
       e.preventDefault()
       dispatch(getRecipes())   //resetea las recipes
     }
@@ -45,7 +45,7 @@ export default function Home() {
   
     function handleOrderByName(e) {
       e.preventDefault()
-      dispatch(filterByName(e.target.value))  //despacho la action
+      dispatch(filterByName(e.target.value))  
       setCurrentPage(1)
     }
   
@@ -68,7 +68,7 @@ export default function Home() {
               
 
                 <div className='bordercont-home'>
-                    <Search/>
+                    <Search />
 
                     <select className='select-home' onChange={(e) => handleOrderByName(e)}>
                         <option value="All">All</option>
@@ -93,7 +93,7 @@ export default function Home() {
                         RESET
                     </button>
 
-                    {currentRecipes.length === 0 && currentRecipes ? ( 
+                    {currentRecipes.length === 0 ? ( 
                         <Loading/>
                         ):(  
                         <div>
@@ -107,6 +107,7 @@ export default function Home() {
                                                 name={el.name} 
                                                 diet={el.diets} 
                                                 image={el.image}
+                                                healthScore={el.healthScore}
                                             />
                                         </Link>
                                     ) 

@@ -3,7 +3,7 @@
 .contains-newrecipe{
     display: flex;
     flex-direction: column;
-    height: 800px;
+    height: 1000px;
     color:white;
     font-weight: bolder;
 }
@@ -86,3 +86,7 @@
     color: white;
 }
 
+.error-controlado{
+    color: red;
+    margin: 0%;
+}

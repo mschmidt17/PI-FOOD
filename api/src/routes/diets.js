@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 
     try {
         diets.forEach((diet) => {                
-            Diet.findOrCreate({            //encontra o crea
+            Diet.findOrCreate({            //busca o crea una dieta en el modelo diet 
             where: {
                 name: diet,
             },

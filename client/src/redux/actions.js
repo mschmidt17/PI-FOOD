@@ -61,8 +61,12 @@ export function getNameRecipes(name) { //por busqueda -> query
         type: 'GET_NAME_RECIPES',
         payload: json.data,
       })
-    } catch (error) {
-      return error
+    } 
+    catch (error) {
+      return dispatch({
+        type: 'GET_NAME_RECIPES',
+        payload: []
+      });
     }
   }
 }

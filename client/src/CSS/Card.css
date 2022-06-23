@@ -19,12 +19,22 @@
   background-color: #d7dfe9;    
 }
 
+.image-card-container{
+  display: flex;
+  width: 300px;
+  border-radius: 18px;
+  height: 200px;
+  overflow: hidden;
+}
+
 .image-card{
   align-self: center;
   border-radius: 20px;
 }
 
 .info-card{
+  display: flex;
+  flex-direction: column;
   padding: 3px;
   align-items: center;
   justify-content: center;

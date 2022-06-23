@@ -14,12 +14,14 @@ export default function Detail() {
 
     useEffect(() => {
         dispatch(getRecipeDetail(id))                       //props.match.params.id
-        dispatch(getClean())                 
+        return () => {
+            dispatch(getClean())
+        };                 
     }, [dispatch, id])                 
 
 
 
-  
+  console.log(myRecipe)
 
     return (
         <div className="super-contenedor">
@@ -27,42 +29,47 @@ export default function Detail() {
                 <button className='button'> HOME </button>
             </Link>
 
-            {myRecipe.length > 0 ?
+            {myRecipe.length === 0 ?
+            <Loading/>
+            :
             <div className='detail-contains'>
                 <div> 
                     <div className="detail-header">
-                        <h1 className='h1'> {myRecipe[0].name && myRecipe[0].name} </h1> 
+                        <h1 className='h1'> {myRecipe[0].name} </h1> 
                     </div>
                     
                     <div className="info-detail">
                         <div className="detail-row1">
-                            <img className='img' src={myRecipe[0].image ? myRecipe[0].image : 'https://images.unsplash.com/photo-1542010589005-d1eacc3918f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1492&q=80'} alt="no se encontro la imagen" />
+                            <img className='img' src={myRecipe[0].image} alt="no se encontro la imagen" />
                             
                             <div>
-                                <h5 className='titles'>Tipe of diet:</h5>
-                                <h2>{myRecipe[0].diets && myRecipe[0].diets.map(el => el + ", ")}</h2>
+                                <h2 className='titles'>Diets:</h2>
+                                <h5>{myRecipe[0].diets && myRecipe[0].diets.map(el => el + ", ")}</h5>
                             </div>
                             
                             <div>
-                                <h5 className='titles'>Dish type:</h5>
-                                <h3 className='dt'>{myRecipe[0].dishTypes ? myRecipe[0].dishTypes.map(d => d.name) : 'Dish type not found'}</h3>
+                                <h2 className='titles'>Dish types:</h2>
+                                <h5 className='dt'>{myRecipe[0].dishTypes ? myRecipe[0].dishTypes.map(d => d + ", ") : 'Dish type not found'}</h5>
                             </div>
                         </div>
 
                         <div className="detail-row2">
                             <div>
-                                <h5 className='titles'>Summary:</h5>
-                                <h3 className='summary'> <div dangerouslySetInnerHTML={{ __html: myRecipe[0].summary }} /></h3>
+                                <h2 className='titles'>Summary:</h2>
+                                <h4 className='summary'> <div dangerouslySetInnerHTML={{ __html: myRecipe[0].summary }} /></h4>
                             </div>
                             
                             <div>
-                                <h5 className='titles'>Health Score:</h5>
-                                <h2>{myRecipe[0].healthScore && myRecipe[0].healthScore}</h2>
+                                <h3>Health Score: {myRecipe[0].healthScore}</h3>
                             </div>
                             
+
                             <div>
                                 <h5 className='titles'>Steps:</h5>
-                                <h4 className='steps'>{Array.isArray(myRecipe[0].steps) ? myRecipe[0].steps.map(e => e.steps.map(f => f.step)) : myRecipe[0].steps}</h4>
+                                {myRecipe.createInDb 
+                                    ? (<h4 className='steps'>{myRecipe[0].steps ? myRecipe[0].steps : "This recipe doesnt have steps"}</h4>)
+                                    : (<h4 className='steps'>{myRecipe[0].steps ? myRecipe[0].steps.map(e => e) : "This recipe doesnt have steps"}</h4>)
+                                }
                             </div>
                         </div>
 
@@ -70,8 +77,8 @@ export default function Detail() {
 
                 </div> 
             </div>
-            : <Loading/>
             }
         </div>
    )
 }
+
