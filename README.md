@@ -148,6 +148,4 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
   <br> </br>
   <img height="400" src="./Foto3.png"/>
   <br> </br>
-  <img height="400" src="./Foto4.png"/>
-  <br> </br>
 </p>
